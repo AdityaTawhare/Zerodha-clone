@@ -1,6 +1,8 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "description": "Zerodha Kite clone frontend React single page application with live market ticks, interactive charts, and portfolio dashboard",
+  "author": "Aditya Tawhare",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.4",
