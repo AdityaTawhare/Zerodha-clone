@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const Signup = () => {
-    const [inputValue, setInputValue] = useState({ email: "", password: "", username: "" });
+const Login = () => {
+    const [inputValue, setInputValue] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const { email, password, username } = inputValue;
+    const { email, password } = inputValue;
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
@@ -22,44 +22,30 @@ const Signup = () => {
         setError("");
         try {
             const { data } = await axios.post(
-                "http://localhost:3002/signup",
+                "http://localhost:3002/login",
                 { ...inputValue },
                 { withCredentials: true }
             );
             const { success: ok, message } = data;
             if (ok) {
-                setSuccess(message || "Account created! Redirecting to dashboard...");
-                setTimeout(() => { window.location.href = "/dashboard"; }, 1400);
+                setSuccess(message || "Login successful! Redirecting...");
+                setTimeout(() => { window.location.href = "/dashboard"; }, 1200);
             } else {
-                setError(message || "Signup failed. Please try again.");
+                setError(message || "Login failed. Please check your credentials.");
             }
         } catch (err) {
             setError(err.response?.data?.message || "Could not reach server. Please try again.");
         } finally {
             setLoading(false);
-            setInputValue({ email: "", password: "", username: "" });
+            setInputValue(prev => ({ ...prev, email: "", password: "" }));
         }
     };
-
-    const inputStyle = {
-        width: "100%",
-        padding: "11px 14px",
-        border: "1px solid #e0e0e0",
-        borderRadius: "8px",
-        fontSize: "14px",
-        fontFamily: "Inter, sans-serif",
-        outline: "none",
-        transition: "border-color 0.2s, box-shadow 0.2s",
-    };
-
-    const handleFocus = e => { e.target.style.borderColor = "#387ed1"; e.target.style.boxShadow = "0 0 0 3px rgba(56,126,209,0.12)"; };
-    const handleBlur  = e => { e.target.style.borderColor = "#e0e0e0"; e.target.style.boxShadow = "none"; };
 
     return (
         <div style={{ minHeight: "80vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 20px" }}>
             <div style={{
                 width: "100%",
-                maxWidth: "420px",
+                maxWidth: "400px",
                 background: "white",
                 border: "1px solid #e8e8e8",
                 borderRadius: "16px",
@@ -67,37 +53,21 @@ const Signup = () => {
                 boxShadow: "0 8px 32px rgba(0,0,0,0.10)",
                 animation: "fadeSlideUp 0.4s ease",
             }}>
-                {/* Header */}
+                {/* Logo */}
                 <div style={{ textAlign: "center", marginBottom: "28px" }}>
                     <img src="media/images/logo.svg" alt="Zerodha" style={{ height: "28px", marginBottom: "20px" }} />
                     <h2 style={{ fontSize: "20px", fontWeight: 700, letterSpacing: "-0.03em", color: "#1a1a1a", margin: 0 }}>
-                        Create your account
+                        Welcome back
                     </h2>
-                    <p style={{ fontSize: "14px", color: "#888", marginTop: "6px" }}>Free forever. No hidden charges.</p>
+                    <p style={{ fontSize: "14px", color: "#888", marginTop: "6px" }}>Sign in to your Zerodha account</p>
                 </div>
 
-                {/* Perks strip */}
-                <div style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    background: "#eff6ff",
-                    borderRadius: "8px",
-                    padding: "10px 14px",
-                    marginBottom: "24px",
-                    fontSize: "12px",
-                    color: "#387ed1",
-                    fontWeight: 600,
-                }}>
-                    <span>✓ Zero commission</span>
-                    <span>✓ ₹1L free funds</span>
-                    <span>✓ Live prices</span>
-                </div>
-
-                {/* Alerts */}
+                {/* Error / Success Alerts */}
                 {error && (
                     <div style={{
                         background: "#fff1f0", border: "1px solid #fca5a5", color: "#dc2626",
                         padding: "10px 14px", borderRadius: "8px", fontSize: "13px", marginBottom: "16px",
+                        display: "flex", alignItems: "center", gap: "8px",
                     }}>
                         ⚠️ {error}
                     </div>
@@ -106,29 +76,14 @@ const Signup = () => {
                     <div style={{
                         background: "#f0fdf4", border: "1px solid #86efac", color: "#16a34a",
                         padding: "10px 14px", borderRadius: "8px", fontSize: "13px", marginBottom: "16px",
+                        display: "flex", alignItems: "center", gap: "8px",
                     }}>
                         ✓ {success}
                     </div>
                 )}
 
                 <form onSubmit={handleSubmit}>
-                    <div style={{ marginBottom: "16px" }}>
-                        <label style={{ display: "block", fontSize: "13px", fontWeight: 600, color: "#444", marginBottom: "7px" }}>
-                            Full name
-                        </label>
-                        <input
-                            type="text"
-                            name="username"
-                            value={username}
-                            placeholder="Aditya Kumar"
-                            onChange={handleOnChange}
-                            required
-                            style={inputStyle}
-                            onFocus={handleFocus}
-                            onBlur={handleBlur}
-                        />
-                    </div>
-                    <div style={{ marginBottom: "16px" }}>
+                    <div style={{ marginBottom: "18px" }}>
                         <label style={{ display: "block", fontSize: "13px", fontWeight: 600, color: "#444", marginBottom: "7px" }}>
                             Email address
                         </label>
@@ -139,9 +94,18 @@ const Signup = () => {
                             placeholder="you@example.com"
                             onChange={handleOnChange}
                             required
-                            style={inputStyle}
-                            onFocus={handleFocus}
-                            onBlur={handleBlur}
+                            style={{
+                                width: "100%",
+                                padding: "11px 14px",
+                                border: "1px solid #e0e0e0",
+                                borderRadius: "8px",
+                                fontSize: "14px",
+                                fontFamily: "Inter, sans-serif",
+                                outline: "none",
+                                transition: "border-color 0.2s, box-shadow 0.2s",
+                            }}
+                            onFocus={e => { e.target.style.borderColor = "#387ed1"; e.target.style.boxShadow = "0 0 0 3px rgba(56,126,209,0.12)"; }}
+                            onBlur={e => { e.target.style.borderColor = "#e0e0e0"; e.target.style.boxShadow = "none"; }}
                         />
                     </div>
                     <div style={{ marginBottom: "24px" }}>
@@ -152,13 +116,21 @@ const Signup = () => {
                             type="password"
                             name="password"
                             value={password}
-                            placeholder="Min 8 characters"
+                            placeholder="••••••••"
                             onChange={handleOnChange}
                             required
-                            minLength={8}
-                            style={inputStyle}
-                            onFocus={handleFocus}
-                            onBlur={handleBlur}
+                            style={{
+                                width: "100%",
+                                padding: "11px 14px",
+                                border: "1px solid #e0e0e0",
+                                borderRadius: "8px",
+                                fontSize: "14px",
+                                fontFamily: "Inter, sans-serif",
+                                outline: "none",
+                                transition: "border-color 0.2s, box-shadow 0.2s",
+                            }}
+                            onFocus={e => { e.target.style.borderColor = "#387ed1"; e.target.style.boxShadow = "0 0 0 3px rgba(56,126,209,0.12)"; }}
+                            onBlur={e => { e.target.style.borderColor = "#e0e0e0"; e.target.style.boxShadow = "none"; }}
                         />
                     </div>
 
@@ -178,17 +150,18 @@ const Signup = () => {
                             cursor: loading ? "not-allowed" : "pointer",
                             transition: "all 0.2s",
                             boxShadow: loading ? "none" : "0 4px 12px rgba(56,126,209,0.25)",
+                            letterSpacing: "-0.01em",
                         }}
                         onMouseEnter={e => !loading && (e.target.style.background = "#2563b0")}
                         onMouseLeave={e => !loading && (e.target.style.background = "#387ed1")}
                     >
-                        {loading ? "Creating account..." : "Create free account →"}
+                        {loading ? "Signing in..." : "Sign in →"}
                     </button>
 
                     <p style={{ textAlign: "center", marginTop: "20px", fontSize: "13px", color: "#888" }}>
-                        Already have an account?{" "}
-                        <Link to="/login" style={{ color: "#387ed1", fontWeight: 600, textDecoration: "none" }}>
-                            Sign in
+                        Don't have an account?{" "}
+                        <Link to="/signup" style={{ color: "#387ed1", fontWeight: 600, textDecoration: "none" }}>
+                            Create one free
                         </Link>
                     </p>
                 </form>
@@ -204,4 +177,4 @@ const Signup = () => {
     );
 };
 
-export default Signup;
+export default Login;

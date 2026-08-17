@@ -1,45 +1,417 @@
+/* ============================================================
+   ZERODHA CLONE — LANDING PAGE CSS
+   Premium design: Inter font, smooth animations, Zerodha palette
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --z-blue:        #387ed1;
+  --z-blue-dark:   #2563b0;
+  --z-blue-soft:   rgba(56,126,209,0.08);
+  --z-orange:      #f05a24;
+  --z-text:        #1a1a1a;
+  --z-text-2:      #555555;
+  --z-text-3:      #888888;
+  --z-bg:          #ffffff;
+  --z-bg-subtle:   #f9f9f9;
+  --z-border:      #e8e8e8;
+  --z-radius:      8px;
+  --z-shadow-sm:   0 2px 8px rgba(0,0,0,0.06);
+  --z-shadow-md:   0 8px 32px rgba(0,0,0,0.10);
+  --z-transition:  0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--z-text);
+  background: var(--z-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+img { max-width: 100%; height: auto; }
+a { color: var(--z-blue); text-decoration: none; transition: color var(--z-transition); }
+a:hover { color: var(--z-blue-dark); }
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+
+/* ── Navbar ─────────────────────────────────────────────────── */
+.navbar {
+  transition: box-shadow var(--z-transition), background var(--z-transition) !important;
 }
 
-.nav-link{
-  margin-left: 40px;
+.nav-link {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #444 !important;
+  padding: 6px 4px !important;
+  transition: color var(--z-transition) !important;
+  margin-left: 0 !important;
 }
 
-#supportHero{
-  background-color: rgb(56, 126, 209);
+.nav-link:hover { color: var(--z-blue) !important; }
+
+/* ── Hero Section ───────────────────────────────────────────── */
+.hero-section {
+  padding: 80px 0 60px;
+  text-align: center;
+  animation: fadeSlideUp 0.7s ease both;
+}
+
+.hero-section h1 {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--z-text);
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+
+.hero-section p {
+  font-size: 17px;
+  color: var(--z-text-2);
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+.hero-section img {
+  border-radius: 12px;
+  box-shadow: var(--z-shadow-md);
+  margin-bottom: 40px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--z-blue);
+  color: white !important;
+  padding: 14px 32px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all var(--z-transition);
+  box-shadow: 0 4px 14px rgba(56,126,209,0.3);
+  border: none;
+  cursor: pointer;
+}
+
+.hero-cta:hover {
+  background: var(--z-blue-dark) !important;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(56,126,209,0.35);
+}
+
+/* ── Stats / Awards Section ─────────────────────────────────── */
+.stats-section {
+  padding: 80px 0;
+  background: var(--z-bg-subtle);
+  border-top: 1px solid var(--z-border);
+  border-bottom: 1px solid var(--z-border);
+}
+
+.stats-section h1, .stats-section h2 {
+  letter-spacing: -0.03em;
+}
+
+.stats-section h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.stats-section h2 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--z-text);
+}
+
+.stats-section p {
+  font-size: 14px;
+  color: var(--z-text-3);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+/* ── Awards / Largest Broker ────────────────────────────────── */
+.awards-section {
+  padding: 80px 0;
+}
+
+.awards-section h1 {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.awards-section ul li {
+  font-size: 14px;
+  color: var(--z-text-2);
+  padding: 4px 0;
+  position: relative;
+  padding-left: 16px;
+}
+
+.awards-section ul li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--z-blue);
+  font-weight: 600;
+}
+
+/* ── Pricing Section ────────────────────────────────────────── */
+.pricing-section {
+  padding: 80px 0;
+  background: var(--z-bg-subtle);
+  text-align: center;
+  border-top: 1px solid var(--z-border);
+}
+
+.pricing-section h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.03em;
+}
+
+.pricing-section p {
+  font-size: 15px;
+  color: var(--z-text-2);
+  margin-bottom: 40px;
+}
+
+.price-card {
+  background: white;
+  border: 1px solid var(--z-border);
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: var(--z-shadow-sm);
+  transition: box-shadow var(--z-transition), transform var(--z-transition);
+}
+
+.price-card:hover {
+  box-shadow: var(--z-shadow-md);
+  transform: translateY(-4px);
+}
+
+.price-card .price {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--z-blue);
+  letter-spacing: -0.04em;
+  margin-bottom: 4px;
+}
+
+.price-card .price-label {
+  font-size: 13px;
+  color: var(--z-text-3);
+  margin-bottom: 16px;
+}
+
+/* ── Education Section ──────────────────────────────────────── */
+.edu-section {
+  padding: 80px 0;
+  text-align: center;
+  border-top: 1px solid var(--z-border);
+}
+
+.edu-section h1 {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+
+.edu-section p {
+  font-size: 15px;
+  color: var(--z-text-2);
+  max-width: 560px;
+  margin: 0 auto 40px;
+}
+
+/* ── Open Account CTA ───────────────────────────────────────── */
+.open-account-section {
+  background: var(--z-blue);
   color: white;
+  padding: 80px 0;
+  text-align: center;
 }
 
-#supportHero a{
+.open-account-section h1 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.open-account-section p {
+  font-size: 15px;
+  opacity: 0.85;
+  margin-bottom: 32px;
+}
+
+.btn-white {
+  background: white;
+  color: var(--z-blue) !important;
+  padding: 13px 32px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  display: inline-block;
+  transition: all var(--z-transition);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+
+.btn-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+footer {
+  background: #f9f9f9 !important;
+  border-top: 1px solid var(--z-border);
+}
+
+footer a {
+  display: block;
+  font-size: 13px;
+  color: var(--z-text-3) !important;
+  margin-bottom: 8px;
+  transition: color var(--z-transition);
+}
+
+footer a:hover { color: var(--z-blue) !important; }
+
+footer p {
+  font-size: 13px;
+  color: var(--z-text-3);
+  line-height: 1.7;
+}
+
+footer .footer-heading {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--z-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+/* ── Login / Signup Forms ───────────────────────────────────── */
+.form_container {
+  background: white;
+  border: 1px solid var(--z-border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--z-shadow-md) !important;
+  animation: fadeSlideUp 0.4s ease;
+}
+
+.form_container h2 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.form-control {
+  border-radius: 6px !important;
+  border: 1px solid var(--z-border) !important;
+  font-size: 14px !important;
+  padding: 10px 14px !important;
+  font-family: 'Inter', sans-serif !important;
+  transition: border-color var(--z-transition), box-shadow var(--z-transition) !important;
+}
+
+.form-control:focus {
+  border-color: var(--z-blue) !important;
+  box-shadow: 0 0 0 3px rgba(56,126,209,0.12) !important;
+  outline: none !important;
+}
+
+.form-label {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--z-text-2) !important;
+  margin-bottom: 6px !important;
+}
+
+.btn-primary {
+  background: var(--z-blue) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  padding: 11px 20px !important;
+  font-family: 'Inter', sans-serif !important;
+  transition: all var(--z-transition) !important;
+  box-shadow: 0 4px 12px rgba(56,126,209,0.25) !important;
+}
+
+.btn-primary:hover {
+  background: var(--z-blue-dark) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(56,126,209,0.35) !important;
+}
+
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Support Page ───────────────────────────────────────────── */
+#supportHero {
+  background: linear-gradient(135deg, var(--z-blue) 0%, #1d5fa6 100%);
   color: white;
+  padding: 60px 0;
 }
 
-#supportWrapper{
+#supportHero a { color: rgba(255,255,255,0.85); }
+
+#supportWrapper {
   display: flex;
   justify-content: space-between;
-  margin: 0 150px;
+  margin: 0 80px;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
-#supportHero input{
-  padding: 20px 50px;
+#supportHero input {
+  padding: 14px 24px;
   width: 100%;
-  font-size: 20px;
-  border-radius: 10px;
+  font-size: 16px;
+  border-radius: 8px;
   border: none;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  outline: none;
+  transition: box-shadow var(--z-transition);
+}
+
+#supportHero input:focus {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
 }
 
 .links {
   display: flex;
-  gap: 20px;   /* spacing between links */
+  gap: 20px;
 }

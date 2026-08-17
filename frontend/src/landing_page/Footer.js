@@ -1,102 +1,95 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+const FOOTER_LINKS = {
+  Company: [
+    { label: "About", to: "/about" },
+    { label: "Products", to: "/product" },
+    { label: "Pricing", to: "/pricing" },
+    { label: "Careers", to: "/" },
+    { label: "Zerodha.tech", to: "/" },
+    { label: "Press & Media", to: "/" },
+  ],
+  Support: [
+    { label: "Contact", to: "/support" },
+    { label: "Support portal", to: "/support" },
+    { label: "Z-Connect blog", to: "/" },
+    { label: "List of charges", to: "/pricing" },
+    { label: "Downloads", to: "/" },
+  ],
+  Account: [
+    { label: "Open an account", to: "/signup" },
+    { label: "Fund transfer", to: "/" },
+    { label: "60 day challenge", to: "/" },
+  ],
+};
 
 function Footer() {
   return (
-    <footer style={{ backgroundColor: "rgb(250, 250, 250)" }}>
-      <div className="container border-top mt-5">
-        <div className="row mt-5">
-          <div className="col">
-            <img src="media/images/logo.svg" style={{ width: "50%" }} />
-            <p>
-              &copy; 2010 - 2024, Not Zerodha Broking Ltd. All rights reserved.
+    <footer style={{ background: "#f9f9f9", borderTop: "1px solid #e8e8e8", fontFamily: "Inter, sans-serif" }}>
+      <div className="container py-5">
+        {/* Top row */}
+        <div className="row g-4 mb-5">
+          {/* Brand */}
+          <div className="col-lg-4 col-md-6">
+            <img src="media/images/logo.svg" style={{ width: "120px", marginBottom: "16px" }} alt="Zerodha" />
+            <p style={{ fontSize: "13px", color: "#888", lineHeight: 1.7, maxWidth: "280px" }}>
+              India's largest stock broker, trusted by 1.3+ crore investors for reliable, low-cost trading.
+            </p>
+            <p style={{ fontSize: "12px", color: "#aaa", marginTop: "12px" }}>
+              &copy; 2010–2026, Zerodha Clone.<br />All rights reserved.
             </p>
           </div>
-          <div className="col">
-            <p>Company</p>
-            <a href="">About</a>
-            <br />
-            <a href="">Products</a>
-            <br />
-            <a href="">Pricing</a>
-            <br />
-            <a href="">Referral programme</a>
-            <br />
-            <a href="">Careers</a>
-            <br />
-            <a href="">Zerodha.tech</a>
-            <br />
-            <a href="">Press & media</a>
-            <br />
-            <a href="">Zerodha cares (CSR)</a>
-            <br />
-          </div>
-          <div className="col">
-            <p>Support</p>
-            <a href="">Contact</a>
-            <br />
-            <a href="">Support portal</a>
-            <br />
-            <a href="">Z-Connect blog</a>
-            <br />
-            <a href="">List of charges</a>
-            <br />
-            <a href="">Downloads & resources</a>
-            <br />
-          </div>
-          <div className="col">
-            <p>Account</p>
-            <a href="">Open an account</a>
-            <br />
-            <a href="">Fund transfer</a>
-            <br />
-            <a href="">60 day challenge</a>
-            <br />
-          </div>
+
+          {/* Link Columns */}
+          {Object.entries(FOOTER_LINKS).map(([heading, links]) => (
+            <div className="col-lg-2 col-md-4 col-6" key={heading}>
+              <p className="footer-heading" style={{
+                fontSize: "12px",
+                fontWeight: 700,
+                color: "#333",
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
+                marginBottom: "16px",
+              }}>
+                {heading}
+              </p>
+              {links.map(({ label, to }) => (
+                <Link
+                  key={label}
+                  to={to}
+                  style={{
+                    display: "block",
+                    fontSize: "13px",
+                    color: "#777",
+                    marginBottom: "10px",
+                    fontWeight: 400,
+                    textDecoration: "none",
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.color = "#387ed1"}
+                  onMouseLeave={e => e.currentTarget.style.color = "#777"}
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
+          ))}
         </div>
-        <div className="mt-5 text-muted" style={{ fontSize: "14px" }}>
-          <p>
-            Zerodha Broking Ltd.: Member of NSE​ &​ BSE – SEBI Registration no.:
-            INZ000031633 CDSL: Depository services through Zerodha Securities
-            Pvt. Ltd. – SEBI Registration no.: IN-DP-100-2015 Commodity Trading
-            through Zerodha Commodities Pvt. Ltd. MCX: 46025 – SEBI Registration
-            no.: INZ000038238 Registered Address: Zerodha Broking Ltd.,
-            #153/154, 4th Cross, Dollars Colony, Opp. Clarence Public School,
-            J.P Nagar 4th Phase, Bengaluru - 560078, Karnataka, India. For any
-            complaints pertaining to securities broking please write to
-            complaints@zerodha.com, for DP related to dp@zerodha.com. Please
-            ensure you carefully read the Risk Disclosure Document as prescribed
-            by SEBI | ICF
-          </p>
 
-          <p>
-            Procedure to file a complaint on SEBI SCORES: Register on SCORES
-            portal. Mandatory details for filing complaints on SCORES: Name,
-            PAN, Address, Mobile Number, E-mail ID. Benefits: Effective
-            Communication, Speedy redressal of the grievances
-          </p>
+        {/* Divider */}
+        <hr style={{ borderColor: "#e8e8e8", margin: "0 0 24px" }} />
 
-          <p>
-            Investments in securities market are subject to market risks; read
-            all the related documents carefully before investing.
+        {/* Regulatory text */}
+        <div style={{ fontSize: "12px", color: "#aaa", lineHeight: 1.8 }}>
+          <p style={{ marginBottom: "10px" }}>
+            Zerodha Broking Ltd.: Member of NSE & BSE – SEBI Registration no.: INZ000031633. CDSL: Depository services through Zerodha Securities Pvt. Ltd. – SEBI Registration no.: IN-DP-100-2015. Commodity Trading through Zerodha Commodities Pvt. Ltd. MCX: 46025 – SEBI Registration no.: INZ000038238. Registered Address: Zerodha Broking Ltd., #153/154, 4th Cross, Dollars Colony, Opp. Clarence Public School, J.P Nagar 4th Phase, Bengaluru - 560078, Karnataka, India.
           </p>
-
+          <p style={{ marginBottom: "10px" }}>
+            Investments in securities market are subject to market risks; read all the related documents carefully before investing.
+          </p>
           <p>
-            "Prevent unauthorised transactions in your account. Update your
-            mobile numbers/email IDs with your stock brokers. Receive
-            information of your transactions directly from Exchange on your
-            mobile/email at the end of the day. Issued in the interest of
-            investors. KYC is one time exercise while dealing in securities
-            markets - once KYC is done through a SEBI registered intermediary
-            (broker, DP, Mutual Fund etc.), you need not undergo the same
-            process again when you approach another intermediary." Dear
-            Investor, if you are subscribing to an IPO, there is no need to
-            issue a cheque. Please write the Bank account number and sign the
-            IPO application form to authorize your bank to make payment in case
-            of allotment. In case of non allotment the funds will remain in your
-            bank account. As a business we don't give stock tips, and have not
-            authorized anyone to trade on behalf of others. If you find anyone
-            claiming to be part of Zerodha and offering such services, please
-            create a ticket here.
+            "Prevent unauthorised transactions in your account. Update your mobile numbers/email IDs with your stock brokers." – Issued in the interest of investors.
           </p>
         </div>
       </div>

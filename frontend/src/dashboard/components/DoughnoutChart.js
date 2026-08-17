@@ -4,6 +4,6 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export function DoughnutChart({ data }) {
-  return <Doughnut data={data} />;
+export function DoughnutChart({ data, options }) {
+  return <Doughnut data={data} options={options} />;
 }
